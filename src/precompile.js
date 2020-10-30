@@ -94,10 +94,10 @@ const precompile = (options = {}) => {
         options.imports = require(imports);
     }
 
-    const isLocalModule = LOCAL_MODULE.test(imports);
-    const tplImportsPath = isLocalModule
-        ? imports
-        : path.relative(path.dirname(options.filename), imports);
+    // const isLocalModule = LOCAL_MODULE.test(imports);
+    // const tplImportsPath = isLocalModule
+    //     ? imports
+    //     : path.relative(path.dirname(options.filename), imports);
     const fn = compile(options);
 
     code = '(' + fn.toString() + ')';
@@ -246,7 +246,8 @@ const precompile = (options = {}) => {
         'var ' +
         CONSTS.IMPORTS +
         ' = require(' +
-        JSON.stringify(tplImportsPath) +
+        // JSON.stringify(tplImportsPath) +
+        JSON.stringify(imports) +
         ');\n' +
         'module.exports = ' +
         code +
